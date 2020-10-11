@@ -10,8 +10,9 @@ import SwiftUI
 public struct PlainRowStyle: RowStyle {
     public func body(content: Content) -> some View {
         content
-            .padding([.top, .bottom], 11.5)
-            .padding(.leading, 16)
+            .background(Color(.systemBackground))
+            .padding([.top, .bottom], 1.5)
+            .padding([.leading, .trailing], 16)
     }
     public init() {}
 }

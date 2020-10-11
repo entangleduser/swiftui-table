@@ -12,7 +12,6 @@ public struct DefaultRowStyle: RowStyle {
         Group {
         content
             .rowStyle(PlainRowStyle())
-            .background(Color(.systemBackground))
             Divider()
                 .padding(.leading, 16)
         }

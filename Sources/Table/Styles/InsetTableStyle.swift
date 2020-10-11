@@ -19,19 +19,19 @@ public struct InsetTableStyle: TableStyle {
         content
     }
     public func content(content: Content) -> some View {
-        content
-            .background(Color(contentBackground))
-            .cornerRadius(cornerRadius)
-            .padding([.top, .bottom], 11.5)
-            .padding([.leading, .trailing], 25)
-            .shadow(color: Color(shadowColor),
-                    radius: shadowRadius,
-                    x: shadowOffset.x,
-                    y: shadowOffset.y)
+            content
+                .background(Color(contentBackground))
+                .cornerRadius(cornerRadius)
+                .padding(x: 25, y: 11.5)
+                .shadow(color: Color(shadowColor),
+                        radius: shadowRadius,
+                        x: shadowOffset.x,
+                        y: shadowOffset.y)
     }
     public func row(content: Row) -> some View {
         content
-            .rowStyle(PlainRowStyle())
+            .rowStyle(DefaultRowStyle())
+            .offset(x: 0, y: 7)
     }
     public init(_ background: UIColor = .systemBackground,
                 contentBackground: UIColor = .systemBackground,

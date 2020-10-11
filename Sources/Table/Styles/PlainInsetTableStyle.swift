@@ -15,11 +15,10 @@ public struct PlainInsetTableStyle: TableStyle {
             )
     }
     public func content(content: Content) -> some View {
-        content
+            content
     }
     public func row(content: Row) -> some View {
         content
-            .rowStyle(DefaultRowStyle())
     }
     public init() {}
 }

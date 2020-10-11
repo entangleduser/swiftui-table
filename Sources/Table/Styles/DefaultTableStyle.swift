@@ -9,17 +9,18 @@ import SwiftUI
 
 public struct DefaultTableStyle: TableStyle {
     public func body(content: Body) -> some View {
-        content
-    }
-    public func content(content: Content) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+        Group {
+            Divider().padding(.leading, 16)
             content
         }
-            .background(Color(.systemBackground))
+    }
+    public func content(content: Content) -> some View {
+            content
+                .background(Color(.systemBackground))
     }
     public func row(content: Row) -> some View {
         content
-        .rowStyle(DefaultRowStyle())
+            .rowStyle(DefaultRowStyle())
     }
     public init() {}
 }

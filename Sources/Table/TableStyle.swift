@@ -22,20 +22,23 @@ public protocol TableStyle {
 public struct TableContent: View {
     public typealias Data = ForEach<[AnyIdentifiable], AnyIdentifiable.ID, TableRow>
     public var data: Data?
-    public var wrapper: AnyView = AnyView(EmptyView())
+    public var wrapper: AnyView
 
     public var body: some View {
-            wrapper
+        wrapper
     }
 }
+
 public extension TableContent {
     init<V: View>(_ view: V, data: Data? = nil) {
-        self.wrapper = AnyView(view)
+        self.wrapper = AnyView(erasing: view)
         self.data = data
-        }
+    }
+
     init(data: Data? = nil) {
         self.init(data, data: data)
     }
+
     init<E: Hashable, V: View>(_ elements: [E], @ViewBuilder content: @escaping (E) -> V) {
         let data =
             Data(elements.identify) { element in
@@ -50,15 +53,16 @@ public extension TableContent {
 
 public extension ListView where Element: Hashable {
     func tableStyle<S>(_ style: S) -> some View where S: TableStyle {
-        var contents = self.content
-        if let data = contents.data {
-            let data =
+        var tableContent = self.content
+        if let data = tableContent.data {
+            let tmp =
                 TableContent.Data(self.elements.identify) { element in
-                    TableRow(style.row(content: data.content(element)))
+                    TableRow(style.row(content: data.content(element))
+                    )
                 }
-            let wrapper = style.content(content: data)
-            contents = TableContent(wrapper, data: contents.data)
+            let wrapper = style.content(content: tmp)
+            tableContent = TableContent(wrapper, data: data)
         }
-        return style.body(content: AnyTable(self, contents))
+        return style.body(content: AnyTable(self, tableContent))
     }
 }
