@@ -1,7 +1,6 @@
 import SwiftUI
 
-public struct Table<Element: Hashable>: ListView {
-    public var elements: [Element]
+public struct Table: ListView {
     public var content: TableContent
     public var axis: Axis.Set = .vertical
     public var showsIndicators = true
@@ -12,16 +11,28 @@ public struct Table<Element: Hashable>: ListView {
     }
 }
 
-public extension Table where Element == Never {
+public extension Table {
 //    init<V: View>(@ViewBuilder content: @escaping () -> V) {
 //        self.content = TableContent(elements, content: content)
 //    }
 }
 
-public extension Table where Element: Hashable {
-    init<V: View>(_ elements: [Element],
-         @ViewBuilder content: @escaping (Element) -> V) {
-        self.elements = elements
+public extension Table {
+    init<E: Hashable, V: View>(_ elements: [E],
+                               @ViewBuilder content: @escaping (E) -> V) {
         self.content = TableContent(elements, content: content)
+    }
+
+    enum SeparatorStyle: View {
+        case none, plain, dashed
+        public var body: some View {
+            if self == .plain {
+                Divider()
+            } else if self == .dashed {
+                Separator(lineWidth: 0.75, dash: [2])
+            } else {
+                EmptyView()
+            }
+        }
     }
 }

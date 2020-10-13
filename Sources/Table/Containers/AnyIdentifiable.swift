@@ -8,19 +8,24 @@
 import Foundation
 
 public struct AnyIdentifiable: Hashable, Identifiable {
-    public static func hash(into hasher: inout Hasher) {
-        hasher.combine(hasher.finalize())
-    }
-    public static func == (lhs: AnyIdentifiable, rhs: AnyIdentifiable) -> Bool {
-        lhs.id == rhs.id
-    }
     public var id: UUID { UUID() }
     public var value: AnyHashable
-    public init<E: Hashable>(_ value: E) {
+    public init<V: Hashable>(_ value: V) {
         self.value = value
     }
 }
-public extension Array where Element: Hashable {
+
+public extension AnyIdentifiable {
+    static func hash(into hasher: inout Hasher) {
+        hasher.combine(hasher.finalize())
+    }
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+public extension Sequence where Element: Hashable {
     var identify: [AnyIdentifiable] {
         self.map { value in
             guard let element = value as? AnyIdentifiable else {

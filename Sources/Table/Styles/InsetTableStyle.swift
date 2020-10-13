@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct InsetTableStyle: TableStyle {
-    //var background: UIColor
+    var background: UIColor
     var contentBackground: UIColor
     var cornerRadius: CGFloat
     var shadowColor: UIColor
@@ -18,30 +18,35 @@ public struct InsetTableStyle: TableStyle {
     public func body(content: Body) -> some View {
         content
     }
+
     public func content(content: Content) -> some View {
-            content
-                .background(Color(contentBackground))
-                .cornerRadius(cornerRadius)
-                .padding(x: 25, y: 11.5)
-                .shadow(color: Color(shadowColor),
-                        radius: shadowRadius,
-                        x: shadowOffset.x,
-                        y: shadowOffset.y)
+        content
+            .contentStyle(
+                InsetContentStyle(
+                    background,
+                    contentBackground: contentBackground,
+                    cornerRadius: cornerRadius,
+                    shadowColor: shadowColor,
+                    shadowRadius: shadowRadius,
+                    shadowOffset: shadowOffset
+                )
+            )
     }
+
     public func row(content: Row) -> some View {
         content
             .rowStyle(DefaultRowStyle())
-            .offset(x: 0, y: 7)
     }
-    public init(_ background: UIColor = .systemBackground,
+
+    public init(_ background: UIColor = .systemGroupedBackground,
                 contentBackground: UIColor = .systemBackground,
                 cornerRadius: CGFloat = 15,
-                shadowColor: UIColor = .darkGray,
-                shadowRadius: CGFloat = 1,
+                shadowColor: UIColor = .secondaryLabel,
+                shadowRadius: CGFloat = 0.5,
                 shadowOffset: CGPoint = .zero) {
-        UIScrollView.appearance(for: .current).backgroundColor = background
-        UINavigationBar.appearance(for: .current).backgroundColor = .clear
-        //self.background = background
+//        UIScrollView.appearance(for: .current).backgroundColor = background
+//        UINavigationBar.appearance(for: .current).backgroundColor = .clear
+        self.background = background
         self.contentBackground = contentBackground
         self.cornerRadius = cornerRadius
         self.shadowColor = shadowColor
