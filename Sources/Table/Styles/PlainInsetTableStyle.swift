@@ -12,7 +12,7 @@ public struct PlainInsetTableStyle: TableStyle {
     public func body(content: Body) -> some View {
         content
             .tableStyle(
-                InsetTableStyle(.systemGroupedBackground, shadowColor: .clear)
+                InsetTableStyle(groupedBackgroundColor, shadowColor: .clear)
             )
     }
 

@@ -14,6 +14,7 @@ public struct TableContent: View {
 
     public var body: some View {
         wrapper
+            .maxFrame()
     }
 }
 

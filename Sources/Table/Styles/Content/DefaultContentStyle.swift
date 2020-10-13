@@ -14,10 +14,10 @@ public struct DefaultContentStyle: ContentStyle {
         VStack(alignment: .leading, spacing: 11.5) {
             Divider()
                 .padding(.leading, 16)
-                .isVisible(showsLine)
+                .visibility(showsLine)
             content
         }
-        .background(Color(.systemBackground))
+        .background(Color(backgroundColor))
     }
 
     public init(showsLine: Bool = true) {

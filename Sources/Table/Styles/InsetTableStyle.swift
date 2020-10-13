@@ -8,10 +8,10 @@
 import SwiftUI
 
 public struct InsetTableStyle: TableStyle {
-    var background: UIColor
-    var contentBackground: UIColor
+    var background: NativeColor
+    var contentBackground: NativeColor
     var cornerRadius: CGFloat
-    var shadowColor: UIColor
+    var shadowColor: NativeColor
     var shadowRadius: CGFloat
     var shadowOffset: CGPoint
 
@@ -38,14 +38,12 @@ public struct InsetTableStyle: TableStyle {
             .rowStyle(DefaultRowStyle())
     }
 
-    public init(_ background: UIColor = .systemGroupedBackground,
-                contentBackground: UIColor = .systemBackground,
+    public init(_ background: NativeColor = groupedBackgroundColor,
+                contentBackground: NativeColor = backgroundColor,
                 cornerRadius: CGFloat = 15,
-                shadowColor: UIColor = .secondaryLabel,
+                shadowColor: NativeColor = secondaryLabelColor,
                 shadowRadius: CGFloat = 0.5,
                 shadowOffset: CGPoint = .zero) {
-//        UIScrollView.appearance(for: .current).backgroundColor = background
-//        UINavigationBar.appearance(for: .current).backgroundColor = .clear
         self.background = background
         self.contentBackground = contentBackground
         self.cornerRadius = cornerRadius

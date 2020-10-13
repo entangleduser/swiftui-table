@@ -11,6 +11,7 @@ public struct TableRow: View {
     var content: AnyView = AnyView(EmptyView())
     public var body: some View {
             content
+                .buttonStyle(defaultButtonStyle)
                 .maxFrame()
     }
 }

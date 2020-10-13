@@ -1,5 +1,24 @@
 import SwiftUI
 
+#if os(iOS)
+public typealias NativeColor = UIColor
+public let defaultTableStyle = DefaultTableStyle()
+public let defaultButtonStyle = DefaultButtonStyle()
+public let separatorColor: NativeColor = .separator
+public let groupedBackgroundColor: NativeColor = .systemGroupedBackground
+public let backgroundColor: NativeColor = .systemBackground
+public let secondaryLabelColor: NativeColor = .secondaryLabel
+
+#elseif os(macOS)
+public let defaultTableStyle = PlainTableStyle()
+public let defaultButtonStyle = BorderlessButtonStyle()
+public typealias NativeColor = NSColor
+public let separatorColor: NativeColor = .separatorColor
+public let groupedBackgroundColor: NativeColor = .underPageBackgroundColor
+public let backgroundColor: NativeColor = .windowBackgroundColor
+public let secondaryLabelColor: NativeColor = .secondaryLabelColor
+#endif
+
 public struct Table: ListView {
     public var content: TableContent
     public var axis: Axis.Set = .vertical
@@ -7,7 +26,7 @@ public struct Table: ListView {
 
     public var body: some View {
         AnyTable(self, content)
-            .tableStyle(DefaultTableStyle())
+            .tableStyle(defaultTableStyle)
     }
 }
 

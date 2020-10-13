@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct InsetContentStyle: ContentStyle {
-    var contentBackground: UIColor
+    var contentBackground: NativeColor
     var cornerRadius: CGFloat
-    var shadowColor: UIColor
+    var shadowColor: NativeColor
     var shadowRadius: CGFloat
     var shadowOffset: CGPoint
 
@@ -27,14 +27,16 @@ public struct InsetContentStyle: ContentStyle {
                         y: shadowOffset.y)
     }
 
-    public init(_ background: UIColor = .systemGroupedBackground,
-                contentBackground: UIColor = .systemBackground,
+    public init(_ background: NativeColor = groupedBackgroundColor,
+                contentBackground: NativeColor = backgroundColor,
                 cornerRadius: CGFloat = 15,
-                shadowColor: UIColor = .secondaryLabel,
+                shadowColor: NativeColor = secondaryLabelColor,
                 shadowRadius: CGFloat = 0.5,
                 shadowOffset: CGPoint = .zero) {
-        UIScrollView.appearance(for: .current).backgroundColor = background
+        #if os(iOS)
+        UIScrollView.appearance().backgroundColor = background
         UINavigationBar.appearance(for: .current).backgroundColor = .clear
+        #endif
         self.contentBackground = contentBackground
         self.cornerRadius = cornerRadius
         self.shadowColor = shadowColor

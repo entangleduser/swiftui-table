@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@frozen
 public struct AnyTable: ListView {
     public var content: TableContent
     public var axis: Axis.Set = .vertical

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct Separator: View {
-    public var color: UIColor = .separator
+    public var color: NativeColor = separatorColor
     public var lineWidth: CGFloat = 0.5
     public var dash: [CGFloat] = []
     public var body: some View {
@@ -17,7 +17,7 @@ public struct Separator: View {
             .offset(y: -0.5)
     }
 
-    public init(color: UIColor = .separator, lineWidth: CGFloat = 0.5, dash: [CGFloat] = []) {
+    public init(color: NativeColor = separatorColor, lineWidth: CGFloat = 0.5, dash: [CGFloat] = []) {
         self.color = color
         self.lineWidth = lineWidth
         self.dash = dash

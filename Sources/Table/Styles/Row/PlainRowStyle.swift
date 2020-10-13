@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct PlainRowStyle: RowStyle {
-    public var background: UIColor
+    public var background: NativeColor
     public var separator: Table.SeparatorStyle
     public var topPadding: CGFloat
     public var bottomPadding: CGFloat
@@ -18,7 +18,6 @@ public struct PlainRowStyle: RowStyle {
     public var separatorTrailSpace: CGFloat
 
     public func body(content: Content) -> some View {
-
         VStack {
             Group {
                 content
@@ -26,15 +25,15 @@ public struct PlainRowStyle: RowStyle {
                     .padding(.bottom, bottomPadding+3)
                     .padding(.leading, leadPadding)
                     .padding(.trailing, trailPadding)
-                    .background(Color(background))
             }
             separator.body
                 .padding(.leading, separatorLeadSpace)
                 .padding(.trailing, separatorTrailSpace)
         }
+        .background(Color(background))
     }
 
-    public init(_ background: UIColor = .systemBackground,
+    public init(_ background: NativeColor = .clear,
                 separator: Table.SeparatorStyle = .plain,
                 topPadding: CGFloat = 0,
                 bottomPadding: CGFloat = 0,
