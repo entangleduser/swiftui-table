@@ -45,12 +45,10 @@ public extension Table {
     enum SeparatorStyle: View {
         case none, plain, dashed
         public var body: some View {
-            if self == .plain {
-                Divider()
-            } else if self == .dashed {
-                Separator(lineWidth: 0.75, dash: [2])
-            } else {
-                EmptyView()
+            switch self {
+            case .plain: Divider()
+            case .dashed: Separator(lineWidth: 0.75, dash: [2])
+            default: EmptyView()
             }
         }
     }
