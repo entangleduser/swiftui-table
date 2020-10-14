@@ -14,9 +14,11 @@ public struct InsetTableStyle: TableStyle {
     var shadowColor: NativeColor
     var shadowRadius: CGFloat
     var shadowOffset: CGPoint
+    var showsLine: Bool
 
     public func body(content: Body) -> some View {
-        content
+            content
+                .modifier(BorderModifier(showsLine: showsLine))
     }
 
     public func content(content: Content) -> some View {
@@ -43,12 +45,14 @@ public struct InsetTableStyle: TableStyle {
                 cornerRadius: CGFloat = 15,
                 shadowColor: NativeColor = secondaryLabelColor,
                 shadowRadius: CGFloat = 0.5,
-                shadowOffset: CGPoint = .zero) {
+                shadowOffset: CGPoint = .zero,
+                showsLine: Bool = false) {
         self.background = background
         self.contentBackground = contentBackground
         self.cornerRadius = cornerRadius
         self.shadowColor = shadowColor
         self.shadowRadius = shadowRadius
         self.shadowOffset = shadowOffset
+        self.showsLine = showsLine
     }
 }

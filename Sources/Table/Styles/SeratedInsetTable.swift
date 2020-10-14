@@ -8,14 +8,16 @@
 import SwiftUI
 
 public struct SeratedInsetTableStyle: TableStyle {
+    public var showsLine: Bool
 
     public func body(content: Body) -> some View {
         content
     }
 
     public func content(content: Content) -> some View {
-            content
-                .contentStyle(InsetContentStyle())
+        content
+            .contentStyle(InsetContentStyle())
+            .modifier(BorderModifier(showsLine: showsLine))
     }
 
     public func row(content: Row) -> some View {
@@ -23,5 +25,7 @@ public struct SeratedInsetTableStyle: TableStyle {
             .rowStyle(SeratedRowStyle())
     }
 
-    public init() {}
+    public init(showsLine: Bool = false) {
+        self.showsLine = showsLine
+    }
 }
