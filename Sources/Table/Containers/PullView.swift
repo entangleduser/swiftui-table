@@ -27,10 +27,11 @@ struct PullView<Content: View>: View {
                                     delay: delay,
                                     offset: $offset,
                                     isFinished: $isFinished,
-                                    action: action).async {
-                                        self.offset =
-                                            outer.frame(in: .global).minY-inner.frame(in: .global).minY
-                                    }
+                                    action: action)
+                            .async {
+                                self.offset =
+                                    outer.frame(in: .global).minY-inner.frame(in: .global).minY
+                            }
                     }
                     .zIndex(1)
                     content.zIndex(0)

@@ -9,6 +9,6 @@ import Foundation
 
 extension Comparable {
     func clamp(_ lhs: Self, _  rhs: Self) -> Self {
-        return min(max(self, lhs), rhs)
+        min(max(self, lhs), rhs)
     }
 }

@@ -44,9 +44,10 @@ struct PullOverlay: View {
 
                 isLoading = true
 
-                DispatchQueue.global().asyncAfter(deadline: delay, qos: .userInitiated) {
-                    action()
-                }
+                DispatchQueue.global()
+                    .asyncAfter(deadline: delay, qos: .userInitiated) {
+                        action()
+                    }
             }
         }
         .fixedSize(horizontal: false, vertical: true)
