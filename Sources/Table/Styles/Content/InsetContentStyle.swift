@@ -34,7 +34,7 @@ public struct InsetContentStyle: ContentStyle {
                 shadowRadius: CGFloat = 0.5,
                 shadowOffset: CGPoint = .zero) {
         #if os(iOS)
-        UIScrollView.appearance().backgroundColor = background
+        UIScrollView.appearance(for: .current).backgroundColor = background
         UINavigationBar.appearance(for: .current).backgroundColor = .clear
         #endif
         self.contentBackground = contentBackground
