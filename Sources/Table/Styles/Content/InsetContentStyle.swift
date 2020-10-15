@@ -16,21 +16,22 @@ public struct InsetContentStyle: ContentStyle {
     private let shadowOffset: CGPoint
 
     public func body(content: Content) -> some View {
-            content
-                .contentStyle(DefaultContentStyle(showsLine: false))
-                .offset(y: 1)
-                .background(Color(contentBackground))
-                .cornerRadius(cornerRadius)
-                .padding(x: 25, y: 11.5)
-                .shadow(color: Color(shadowColor),
-                        radius: shadowRadius,
-                        x: shadowOffset.x,
-                        y: shadowOffset.y).onAppear {
-                            #if os(iOS)
-                            UIScrollView.appearance(for: .current).backgroundColor = background
-                            UINavigationBar.appearance(for: .current).backgroundColor = .clear
-                            #endif
-                        }
+        content
+            .contentStyle(DefaultContentStyle(showsLine: false))
+            .offset(y: 1)
+            .background(Color(contentBackground))
+            .cornerRadius(cornerRadius)
+            .padding(x: 25, y: 11.5)
+            .shadow(color: Color(shadowColor),
+                    radius: shadowRadius,
+                    x: shadowOffset.x,
+                    y: shadowOffset.y)
+            .onAppear {
+                #if os(iOS)
+                UIScrollView.appearance(for: .current).backgroundColor = background
+                UINavigationBar.appearance(for: .current).backgroundColor = .clear
+                #endif
+            }
     }
 
     public init(_ background: NativeColor = groupedBackgroundColor,
