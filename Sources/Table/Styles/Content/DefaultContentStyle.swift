@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct DefaultContentStyle: ContentStyle {
-    public var showsLine: Bool
+    private let showsLine: Bool
 
     public func body(content: Content) -> some View {
         VStack(alignment: .leading, spacing: 11.5) {

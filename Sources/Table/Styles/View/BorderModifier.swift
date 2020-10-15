@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct BorderModifier: ViewModifier {
-    public var showsLine: Bool
+    let showsLine: Bool
 
     public func body(content: Content) -> some View {
         Group {

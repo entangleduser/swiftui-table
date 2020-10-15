@@ -9,8 +9,9 @@ import SwiftUI
 
 public struct TableContent: View {
     public typealias Data = ForEach<[AnyIdentifiable], AnyIdentifiable.ID, TableRow>
-    public var data: Data?
-    public var wrapper: AnyView
+
+    let data: Data?
+    let wrapper: AnyView
 
     public var body: some View {
         wrapper
@@ -18,7 +19,7 @@ public struct TableContent: View {
     }
 }
 
-public extension TableContent {
+extension TableContent {
     init<V: View>(_ view: V, data: Data? = nil) {
         self.wrapper = AnyView(view)
         self.data = data
@@ -31,7 +32,8 @@ public extension TableContent {
     init<E: Hashable, V: View>(_ elements: [E], @ViewBuilder content: @escaping (E) -> V) {
         let data =
             Data(elements.identify) { element in
-                guard let element = element.value as? E else {
+                guard
+                    let element = element.value as? E else {
                     return TableRow()
                 }
                 return TableRow(content(element))

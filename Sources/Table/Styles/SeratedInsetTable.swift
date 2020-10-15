@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct SeratedInsetTableStyle: TableStyle {
-    public var showsLine: Bool
+    private let showsLine: Bool
 
     public func body(content: Body) -> some View {
         content

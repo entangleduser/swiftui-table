@@ -8,7 +8,8 @@
 import SwiftUI
 
 public struct TableRow: View {
-    var content: AnyView = AnyView(EmptyView())
+    private var content: AnyView = AnyView(EmptyView())
+
     public var body: some View {
             content
                 .buttonStyle(defaultButtonStyle)
@@ -16,8 +17,8 @@ public struct TableRow: View {
     }
 }
 
-extension TableRow {
-    public init<V: View>(_ view: V) {
+public extension TableRow {
+    init<V: View>(_ view: V) {
         self.content = AnyView(view)
     }
 }

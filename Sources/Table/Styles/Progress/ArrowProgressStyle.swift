@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ArrowProgressStyle: ProgressViewStyle {
-    func makeBody(configuration: Configuration) -> some View {
+public struct ArrowProgressStyle: ProgressViewStyle {
+    public func makeBody(configuration: Configuration) -> some View {
         Group {
             switch configuration.fractionCompleted! {
             case 0..<1:
@@ -26,4 +26,5 @@ struct ArrowProgressStyle: ProgressViewStyle {
             }
         }
     }
+    public init() {}
 }

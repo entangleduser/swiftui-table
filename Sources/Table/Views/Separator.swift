@@ -8,9 +8,10 @@
 import SwiftUI
 
 public struct Separator: View {
-    public var color: NativeColor = separatorColor
-    public var lineWidth: CGFloat = 0.5
-    public var dash: [CGFloat] = []
+    private let color: NativeColor
+    private let lineWidth: CGFloat
+    private let dash: [CGFloat]
+
     public var body: some View {
         Divider().invisible()
             .separator(color, lineWidth: lineWidth, dash: dash)

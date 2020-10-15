@@ -8,14 +8,14 @@
 import SwiftUI
 
 public struct PlainRowStyle: RowStyle {
-    public var background: NativeColor
-    public var separator: Table.SeparatorStyle
-    public var topPadding: CGFloat
-    public var bottomPadding: CGFloat
-    public var leadPadding: CGFloat
-    public var trailPadding: CGFloat
-    public var separatorLeadSpace: CGFloat
-    public var separatorTrailSpace: CGFloat
+    private let background: NativeColor
+    private let separator: Table.SeparatorStyle
+    private let topPadding: CGFloat
+    private let bottomPadding: CGFloat
+    private let leadPadding: CGFloat
+    private let trailPadding: CGFloat
+    private let separatorLeadSpace: CGFloat
+    private let separatorTrailSpace: CGFloat
 
     public func body(content: Content) -> some View {
         VStack {

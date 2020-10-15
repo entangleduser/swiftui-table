@@ -8,13 +8,13 @@
 import SwiftUI
 
 public struct InsetTableStyle: TableStyle {
-    var background: NativeColor
-    var contentBackground: NativeColor
-    var cornerRadius: CGFloat
-    var shadowColor: NativeColor
-    var shadowRadius: CGFloat
-    var shadowOffset: CGPoint
-    var showsLine: Bool
+    private let background: NativeColor
+    private let contentBackground: NativeColor
+    private let cornerRadius: CGFloat
+    private let shadowColor: NativeColor
+    private let shadowRadius: CGFloat
+    private let shadowOffset: CGPoint
+    private let showsLine: Bool
 
     public func body(content: Body) -> some View {
             content
