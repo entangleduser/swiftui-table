@@ -2,6 +2,11 @@
 
 Customizable tables for SwiftUI.
 
+## How to add this to my project?
+Add to your current **Package.swift**, drag and drop into your project, or open Xcode and go to **File**>**Swift Packages**>**Add Package Dependency...**
+
+Works for iOS v14 due to native `ProgressView` support and `UIImpactFeedbackGenerator` from UIKit.
+
 ```swift
 import SwiftUI
 import Table
