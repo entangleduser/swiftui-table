@@ -9,7 +9,10 @@ import SwiftUI
 
 struct PullView<Content: View>: View {
     private let threshold: CGFloat
+    #if os(iOS)
     private let impact: UIImpactFeedbackGenerator.FeedbackStyle?
+    #endif
+    private let timeout: UInt32
     private let delay: DispatchTime
     private let content: Content
     private let action: () -> Void
@@ -24,6 +27,7 @@ struct PullView<Content: View>: View {
                     GeometryReader { inner in
                         PullOverlay(threshold: threshold,
                                     impact: impact,
+                                    timeout: timeout,
                                     delay: delay,
                                     offset: $offset,
                                     isFinished: $isFinished,
@@ -42,12 +46,14 @@ struct PullView<Content: View>: View {
 
     public init(threshold: CGFloat,
                 impact: UIImpactFeedbackGenerator.FeedbackStyle?,
+                timeout: UInt32,
                 delay: DispatchTime,
                 isFinished: Binding<Bool>,
                 action: @escaping () -> Void,
                 content: Content) {
         self.threshold = threshold
         self.impact = impact
+        self.timeout = timeout
         self.delay = delay
         self._isFinished = isFinished
         self.action = action

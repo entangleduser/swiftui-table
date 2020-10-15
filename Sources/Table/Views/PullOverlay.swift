@@ -9,7 +9,14 @@ import SwiftUI
 
 struct PullOverlay: View {
     let threshold: CGFloat
+    #if os(iOS)
     let impact: UIImpactFeedbackGenerator.FeedbackStyle?
+    var impactGenerator: UIImpactFeedbackGenerator? {
+        guard let impact = impact else { return nil }
+        return UIImpactFeedbackGenerator(style: impact)
+    }
+    #endif
+    let timeout: UInt32
     let delay: DispatchTime
 
     @Binding var offset: CGFloat
@@ -32,22 +39,26 @@ struct PullOverlay: View {
             }
         }
         .async {
-            if isFinished {
-                isLoading = false
+            guard !isFinished else {
                 isFinished = false
-            } else if offset == threshold {
+                return
+            }
+
+            if offset == threshold {
                 guard !isLoading else { return }
 
-                if let impact = impact {
-                    UIImpactFeedbackGenerator(style: impact).impactOccurred()
-                }
-
                 isLoading = true
+
+                #if os(iOS)
+                impactGenerator?.impactOccurred()
+                #endif
 
                 DispatchQueue.global()
                     .asyncAfter(deadline: delay, qos: .userInitiated) {
                         action()
-                    }
+                        sleep(timeout)
+                        isLoading = false
+                }
             }
         }
         .fixedSize(horizontal: false, vertical: true)

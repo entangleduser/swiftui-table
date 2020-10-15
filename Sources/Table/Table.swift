@@ -1,6 +1,6 @@
 import SwiftUI
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
 public typealias NativeColor = UIColor
 let defaultTableStyle = DefaultTableStyle()
 let defaultButtonStyle = DefaultButtonStyle()

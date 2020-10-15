@@ -68,14 +68,16 @@ public extension View {
 
     func onPull(threshold: CGFloat = 80,
                 impact: UIImpactFeedbackGenerator.FeedbackStyle? = .rigid,
+                timeout: UInt32 = 10,
                 delay: DispatchTime = .now(),
                 isFinished: Binding<Bool>,
                 perform: @escaping () -> Void) -> some View {
-        PullView(threshold: threshold,
-                 impact: impact,
-                 delay: delay,
-                 isFinished: isFinished,
-                 action: perform,
-                 content: self)
+    PullView(threshold: threshold,
+             impact: impact,
+             timeout: timeout,
+             delay: delay,
+             isFinished: isFinished,
+             action: perform,
+             content: self)
     }
 }
