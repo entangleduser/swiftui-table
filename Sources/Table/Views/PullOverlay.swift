@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PullOverlay: View {
-    let feedback = UIImpactFeedbackGenerator(style: .rigid)
     let threshold: CGFloat
+    let impact: UIImpactFeedbackGenerator.FeedbackStyle?
     let delay: DispatchTime
 
     @Binding var offset: CGFloat
@@ -36,9 +36,12 @@ struct PullOverlay: View {
                 isLoading = false
                 isFinished = false
             } else if offset == threshold {
-
                 guard !isLoading else { return }
-                feedback.impactOccurred()
+
+                if let impact = impact {
+                    UIImpactFeedbackGenerator(style: impact).impactOccurred()
+                }
+
                 isLoading = true
 
                 DispatchQueue.global().asyncAfter(deadline: delay, qos: .userInitiated) {

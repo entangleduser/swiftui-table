@@ -7,21 +7,23 @@
 
 import SwiftUI
 
-public struct PullView<Content: View>: View {
-    let threshold: CGFloat
-    let delay: DispatchTime
-    let content: Content
-    let action: () -> Void
+struct PullView<Content: View>: View {
+    private let threshold: CGFloat
+    private let impact: UIImpactFeedbackGenerator.FeedbackStyle?
+    private let delay: DispatchTime
+    private let content: Content
+    private let action: () -> Void
 
-    @State var offset: CGFloat = 0
-    @Binding var isFinished: Bool
+    @State private var offset: CGFloat = 0
+    @Binding private var isFinished: Bool
 
-    public var body: some View {
+    var body: some View {
         GeometryReader { outer in
             ScrollView {
                 ZStack(alignment: .top) {
                     GeometryReader { inner in
                         PullOverlay(threshold: threshold,
+                                    impact: impact,
                                     delay: delay,
                                     offset: $offset,
                                     isFinished: $isFinished,
@@ -38,11 +40,13 @@ public struct PullView<Content: View>: View {
     }
 
     public init(threshold: CGFloat,
+                impact: UIImpactFeedbackGenerator.FeedbackStyle?,
                 delay: DispatchTime,
                 isFinished: Binding<Bool>,
                 action: @escaping () -> Void,
                 content: Content) {
         self.threshold = threshold
+        self.impact = impact
         self.delay = delay
         self._isFinished = isFinished
         self.action = action
