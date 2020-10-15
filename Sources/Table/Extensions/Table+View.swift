@@ -5,10 +5,9 @@
 //  Created by neutralradiance on 10/9/20.
 //
 
-import AVFoundation
 import SwiftUI
 
-public extension View {
+extension View {
     func visibility(_ isVisible: Bool) -> some View {
         self.opacity(isVisible ? 1 : 0)
     }
@@ -45,20 +44,9 @@ public extension View {
             }
         }
     }
+}
 
-    func onPull(threshold: CGFloat = 80,
-                impact: UIImpactFeedbackGenerator.FeedbackStyle? = .rigid,
-                delay: DispatchTime = .now(),
-                isFinished: Binding<Bool>,
-                perform: @escaping () -> Void) -> some View {
-        PullView(threshold: threshold,
-                 impact: impact,
-                 delay: delay,
-                 isFinished: isFinished,
-                 action: perform,
-                 content: self)
-    }
-
+public extension View {
     func separator(_ color: NativeColor = separatorColor, lineWidth: CGFloat = 1, dash: [CGFloat] = []) -> some View {
         self.overlay(
             GeometryReader { proxy in
@@ -76,5 +64,18 @@ public extension View {
             }
             .offset(x: -12.5)
         )
+    }
+
+    func onPull(threshold: CGFloat = 80,
+                impact: UIImpactFeedbackGenerator.FeedbackStyle? = .rigid,
+                delay: DispatchTime = .now(),
+                isFinished: Binding<Bool>,
+                perform: @escaping () -> Void) -> some View {
+        PullView(threshold: threshold,
+                 impact: impact,
+                 delay: delay,
+                 isFinished: isFinished,
+                 action: perform,
+                 content: self)
     }
 }
