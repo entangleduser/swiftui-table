@@ -54,7 +54,7 @@ struct PullOverlay: View {
                 #endif
 
                 DispatchQueue.global()
-                    .asyncAfter(deadline: delay, qos: .userInitiated) {
+                    .asyncAfter(deadline: delay, qos: .default) {
                         action()
                         sleep(timeout)
                         isLoading = false
