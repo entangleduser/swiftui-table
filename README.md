@@ -1,4 +1,4 @@
-![](https://neutralradiance.github.io/sources/images/table.jpeg)
+![](https://neutralradiance.github.io/sources/images/table.jpg)
 
 Customizable tables for SwiftUI.
 
