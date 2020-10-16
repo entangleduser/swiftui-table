@@ -19,7 +19,8 @@ Table(items) { item in
 }
 .tableStyle(SeratedInsetTableStyle())
 .onPull(threshold: 100,
-        impact: .none,
+        impact: .rigid,
+        timeout: 16,
         delay: .now() + 0.5,
         isFinished: .constant(true)) {
     // Action goes here
