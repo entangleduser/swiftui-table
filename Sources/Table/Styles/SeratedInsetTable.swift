@@ -16,7 +16,7 @@ public struct SeratedInsetTableStyle: TableStyle {
 
     public func content(content: Content) -> some View {
         content
-            .contentStyle(InsetContentStyle())
+            .contentStyle(InsetTableContenStyle())
             .modifier(BorderModifier(showsLine: showsLine))
     }
 

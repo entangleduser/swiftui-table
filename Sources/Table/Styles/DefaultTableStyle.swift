@@ -15,7 +15,7 @@ public struct DefaultTableStyle: TableStyle {
 
     public func content(content: Content) -> some View {
         content
-            .contentStyle(DefaultContentStyle())
+            .contentStyle(DefaultTableContenStyle())
     }
 
     public func row(content: Row) -> some View {

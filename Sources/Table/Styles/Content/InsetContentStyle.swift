@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct InsetContentStyle: ContentStyle {
+public struct InsetTableContenStyle: TableContenStyle {
     private let background: UIColor
     private let contentBackground: NativeColor
     private let cornerRadius: CGFloat
@@ -17,9 +17,10 @@ public struct InsetContentStyle: ContentStyle {
 
     public func body(content: Content) -> some View {
         content
-            .contentStyle(DefaultContentStyle(showsLine: false))
+            .contentStyle(DefaultTableContenStyle(showsLine: false))
             .offset(y: 1)
             .background(Color(contentBackground))
+            .maxFrame(align: .center)
             .cornerRadius(cornerRadius)
             .padding(x: 25, y: 11.5)
             .shadow(color: Color(shadowColor),

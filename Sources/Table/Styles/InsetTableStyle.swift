@@ -24,7 +24,7 @@ public struct InsetTableStyle: TableStyle {
     public func content(content: Content) -> some View {
         content
             .contentStyle(
-                InsetContentStyle(
+                InsetTableContenStyle(
                     background,
                     contentBackground: contentBackground,
                     cornerRadius: cornerRadius,

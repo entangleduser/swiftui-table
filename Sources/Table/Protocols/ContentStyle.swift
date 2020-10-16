@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public protocol ContentStyle {
+public protocol TableContenStyle {
     typealias Content = TableContent.Data
     associatedtype ModifiedContent: View
     func body(content: Content) -> ModifiedContent
 }
 
 public extension TableContent.Data {
-    func contentStyle<Style>(_ style: Style) -> some View where Style: ContentStyle {
+    func contentStyle<Style>(_ style: Style) -> some View where Style: TableContenStyle {
         style.body(content: self)
     }
 }

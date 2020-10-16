@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DefaultContentStyle: ContentStyle {
+public struct DefaultTableContenStyle: TableContenStyle {
     private let showsLine: Bool
 
     public func body(content: Content) -> some View {
