@@ -1,26 +1,38 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by neutralradiance on 10/12/20.
 //
 
 import SwiftUI
 
-public struct DefaultTableContenStyle: TableContenStyle {
-    private let showsLine: Bool
+public struct DefaultTableContentStyle: TableContentStyle {
+  let showsLine: Bool
+  let separator: Table.SeparatorStyle
+  let leadPadding: CGFloat
+  let trailPadding: CGFloat
 
-    public func body(content: Content) -> some View {
-        VStack(alignment: .leading, spacing: 11.5) {
-            Divider()
-                .padding(.leading, 16)
-                .visibility(showsLine)
-            content
-        }
-        .background(Color(backgroundColor))
-    }
+  public func body(content: Content) -> some View {
+    content
+      .background(Color(.systemBackground))
+      .modifier(
+        BorderModifier(showsLine: showsLine,
+                       separator: separator,
+                       leadPadding: leadPadding,
+                       trailPadding: trailPadding)
+      )
+  }
 
-    public init(showsLine: Bool = true) {
-        self.showsLine = showsLine
-    }
+  public init(
+    showsLine: Bool = true,
+    separator: Table.SeparatorStyle = .plain(),
+    leadPadding: CGFloat = 0,
+    trailPadding: CGFloat = 0
+  ) {
+    self.showsLine = showsLine
+    self.separator = separator
+    self.leadPadding = leadPadding
+    self.trailPadding = trailPadding
+  }
 }

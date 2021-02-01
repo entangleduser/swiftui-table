@@ -8,11 +8,14 @@
 import SwiftUI
 
 public struct DefaultRowStyle: RowStyle {
+  public func body(content: Content) -> some View {
+    content
+      .rowStyle(PlainRowStyle(
+        .systemBackground,
+        separatorLeadSpace: 16
+      )
+      )
+  }
 
-    public func body(content: Content) -> some View {
-        content
-            .rowStyle(PlainRowStyle())
-    }
-
-    public init() {}
+  public init() {}
 }

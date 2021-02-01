@@ -1,35 +1,49 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by neutralradiance on 10/11/20.
 //
 
-import Foundation
+import SwiftUI
 
-public struct AnyIdentifiable: Hashable, Identifiable {
-    let value: AnyHashable
-    init<V: Hashable>(_ value: V) {
-        self.value = value
-    }
+public struct AnyIdentifiable: Identifiable {
+  public let id: AnyHashable
+  let value: Any
+
+  public init<ID: Hashable, Value>(id: ID, _ value: Value) {
+    self.id = id
+    self.value = value
+  }
 }
 
-public extension AnyIdentifiable {
-    var id: UUID { UUID() }
-
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+extension Sequence {
+  func identifyAll() -> [AnyIdentifiable] {
+    map { value in
+      guard
+        let element = value as? AnyIdentifiable else {
+        return AnyIdentifiable(id: UUID(), value)
+      }
+      return element
     }
+  }
 }
 
-extension Sequence where Element: Hashable {
-    var identify: [AnyIdentifiable] {
-        self.map { value in
-            guard
-                let element = value as? AnyIdentifiable else {
-                return AnyIdentifiable(value)
-            }
-            return element
-        }
+extension Sequence where Element: Identifiable {
+  var wrapAll: [AnyIdentifiable] {
+    map { value in
+      guard
+        let element =
+        value as? AnyIdentifiable else {
+        return AnyIdentifiable(id: value.id, value)
+      }
+      return element
     }
+  }
+}
+
+extension AnyIdentifiable: CustomReflectable {
+  public var customMirror: Mirror {
+    Mirror(reflecting: value)
+  }
 }

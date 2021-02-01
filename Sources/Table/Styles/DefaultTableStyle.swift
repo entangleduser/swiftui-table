@@ -8,20 +8,19 @@
 import SwiftUI
 
 public struct DefaultTableStyle: TableStyle {
+  public func body(content: Body) -> some View {
+    content
+  }
 
-    public func body(content: Body) -> some View {
-        content
-    }
+  public func content(content: Content) -> some View {
+    content
+      .contentStyle(DefaultTableContentStyle())
+  }
 
-    public func content(content: Content) -> some View {
-        content
-            .contentStyle(DefaultTableContenStyle())
-    }
+  public func row(content: Row) -> some View {
+    content
+      .rowStyle(DefaultRowStyle())
+  }
 
-    public func row(content: Row) -> some View {
-        content
-            .rowStyle(DefaultRowStyle())
-    }
-
-    public init() {}
+  public init() {}
 }
