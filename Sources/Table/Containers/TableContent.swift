@@ -8,8 +8,6 @@
 import SwiftUI
 
 public struct TableContent: DynamicViewContent {
-//    @FocusedValue(\.selection) var selectionValue: IndexSet!
-
   public typealias Wrapper = ForEach<Data, AnyHashable, TableRow>
   public var wrapper: Wrapper
 
@@ -19,7 +17,9 @@ public struct TableContent: DynamicViewContent {
   public var content: AnyView
 
   public var body: some View {
-    content.maxFrame()
+    VStack {
+      content.maxFrame()
+    }
   }
 }
 

@@ -13,8 +13,9 @@ public struct Table: ListView {
 }
 
 public extension Table {
-  init<E: Hashable, V: View>(_ elements: [E],
-                             @ViewBuilder content: @escaping (E) -> V) {
+  init<E: Hashable, V: View>(
+    _ elements: [E],
+    @ViewBuilder content: @escaping (E) -> V) {
     self.content = TableContent(data: elements, content: content)
   }
 
@@ -39,10 +40,10 @@ public extension Table {
 }
 
 public extension Table {
-  init<V: View>(
-    @TableBuilder content: @escaping () -> V
+  init(
+    @TableBuilder content: @escaping () -> TableContent.Wrapper
   ) {
-    let wrapper = content() as! TableContent.Wrapper
+    let wrapper = content()
     self.content = TableContent(data: wrapper.data, wrapper)
   }
 }
