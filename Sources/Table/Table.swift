@@ -1,10 +1,14 @@
 import SwiftUI
 
+@_functionBuilder
 public struct Table: ListView {
   public var content: TableContent
   @State public var axis: Axis.Set = .vertical
   @State public var showsIndicators = true
+}
 
+// MARK: Conformances
+extension Table: View {
   public var body: some View {
     AnyTable(
       self, content
@@ -12,13 +16,38 @@ public struct Table: ListView {
   }
 }
 
+// MARK: Build Blocks
+public extension Table {
+  static func buildBlock<V>(_ views: V...) -> TableContent.Wrapper
+    where V: View {
+    ForEach(Array(0 ..< views.count), id: \.self) { element in
+      guard let value = element as? Int else {
+        return TableRow()
+      }
+      return TableRow(views[value])
+    }
+  }
+}
+
+// MARK: Intiializers
 public extension Table {
   init<E: Hashable, V: View>(
     _ elements: [E],
-    @ViewBuilder content: @escaping (E) -> V) {
+    @ViewBuilder content: @escaping (E) -> V
+  ) {
     self.content = TableContent(data: elements, content: content)
   }
 
+  init(
+    @Table content: @escaping () -> TableContent.Wrapper
+  ) {
+    let wrapper = content()
+    self.content = TableContent(data: wrapper.data, wrapper)
+  }
+}
+
+// MARK: Properties
+public extension Table {
   enum SeparatorStyle: View {
     case none,
          plain(UIColor? = nil),
@@ -35,28 +64,6 @@ public extension Table {
         )
       default: EmptyView()
       }
-    }
-  }
-}
-
-public extension Table {
-  init(
-    @TableBuilder content: @escaping () -> TableContent.Wrapper
-  ) {
-    let wrapper = content()
-    self.content = TableContent(data: wrapper.data, wrapper)
-  }
-}
-
-@_functionBuilder
-public enum TableBuilder {
-  public static func buildBlock<V>(_ views: V...) -> TableContent.Wrapper
-    where V: View {
-    ForEach(Array(0 ..< views.count), id: \.self) { element in
-      guard let value = element as? Int else {
-        return TableRow()
-      }
-      return TableRow(views[value])
     }
   }
 }
